@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <meta
+    name="theme-color"
+    content="#f4f1e8"
+  >
+
+  <meta
+    name="description"
+    content="Chemistry from first principles — an independent learning companion for JEE, NEET and MIT-level exploration."
+  >
+
+  <title>
+    Chemistry from First Principles — Sadoway Chemistry Lab
+  </title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Figtree:wght@400;500;600;700&family=Source+Serif+4:ital,wght@0,500;0,600;1,500&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ======================================================
+       ANNOUNCEMENT
+  ======================================================= -->
+
+  <div class="notice" id="notice">
+    <div class="wrap notice-inner">
+
+      <span class="pill">
+        LEARNING LAB
+      </span>
+
+      <span class="notice-text">
+        Original lecture archive + visual chemistry tools for
+        JEE, NEET & MIT-level learners.
+      </span>
+
+      <button
+        id="noticeClose"
+        aria-label="Close announcement"
+      >
+        ×
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ======================================================
+       HEADER
+  ======================================================= -->
+
+  <header class="header" id="header">
+
+    <div class="wrap nav">
+
+      <a
+        class="brand"
+        href="#"
+      >
+
+        <span
+          class="brand-glyph"
+          aria-hidden="true"
+        >
+          <i></i>
+          <i></i>
+          <i></i>
+        </span>
+
+        <span>
+          SADOWAY
+          <small>
+            CHEMISTRY LAB
+          </small>
+        </span>
+
+      </a>
+
+
+      <button
+        class="menu"
+        id="menu"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+
+
+      <nav id="nav">
+
+        <a href="#learn">
+          Learn
+        </a>
+
+        <a href="#lectures">
+          Lectures
+        </a>
+
+        <a href="#elements">
+          Elements
+        </a>
+
+        <a href="#method">
+          Method
+        </a>
+
+        <a href="#about">
+          About
+        </a>
+
+        <a
+          class="nav-button"
+          href="https://www.youtube.com/playlist?list=PLF83B8D8C87426E44"
+          target="_blank"
+          rel="noopener"
+        >
+          Open playlist ↗
+        </a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- ======================================================
+       MAIN
+  ======================================================= -->
+
+  <main>
+
+
+    <!-- ====================================================
+         HERO
+    ===================================================== -->
+
+    <section class="hero">
+
+      <div class="wrap hero-grid">
+
+        <div class="hero-copy">
+
+          <p class="kicker">
+            <span></span>
+            CHEMISTRY · FIRST PRINCIPLES
+          </p>
+
+          <h1>
+            See the chemistry
+            <br>
+            <em>underneath</em>
+            the symbols.
+          </h1>
+
+          <p class="lede">
+            Use the lecture archive as a deep conceptual layer —
+            then translate what you learn into the language of
+            JEE, NEET and university chemistry.
+          </p>
+
+
+          <div class="hero-actions">
+
+            <a
+              class="button primary"
+              href="#lectures"
+            >
+              Start with lectures ↓
+            </a>
+
+            <a
+              class="button ghost"
+              href="#learn"
+            >
+              Choose your goal
+            </a>
+
+          </div>
+
+
+          <div class="hero-meta">
+
+            <span class="live-dot"></span>
+
+            <span>
+              Independent learning companion ·
+              not an official MIT course
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- HERO VISUAL -->
+
+        <div class="hero-art">
+
+          <div class="art-top">
+
+            <span>
+              01
+            </span>
+
+            <span>
+              MATTER · ENERGY · CHARGE
+            </span>
+
+          </div>
+
+
+          <canvas
+            id="heroCanvas"
+            aria-hidden="true"
+          ></canvas>
+
+
+          <div class="art-label label-l">
+            ION
+            <br>
+            MOTION
+          </div>
+
+
+          <div class="art-label label-r">
+            ELECTRON
+            <br>
+            FLOW
+          </div>
+
+
+          <div class="art-equation">
+            ΔG
+            <b>→</b>
+            work
+          </div>
+
+
+          <div class="art-bottom">
+
+            <span>
+              electrochemical system
+            </span>
+
+            <span>
+              visual model
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="scroll-hint">
+
+        SCROLL
+
+        <span></span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         STATS
+    ===================================================== -->
+
+    <section class="band">
+
+      <div class="wrap stats">
+
+        <div>
+
+          <strong
+            data-count="118"
+          >
+            0
+          </strong>
+
+          <span>
+            elements to explore
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong
+            data-count="3"
+          >
+            0
+          </strong>
+
+          <span>
+            learner modes
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong
+            data-count="1"
+          >
+            0
+          </strong>
+
+          <span>
+            lecture archive
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <strong>
+            ∞
+          </strong>
+
+          <span>
+            practice depth
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         LEARNING LENSES
+    ===================================================== -->
+
+    <section
+      class="section"
+      id="learn"
+    >
+
+      <div class="wrap">
+
+        <div class="heading">
+
+          <p class="kicker">
+            <span></span>
+            CHOOSE YOUR LENS
+          </p>
+
+          <h2>
+            One science.
+            <em>Three ways to use it.</em>
+          </h2>
+
+          <p>
+            Switch the lens depending on what you need today.
+            These are study lenses, not official syllabus claims.
+          </p>
+
+        </div>
+
+
+        <div
+          class="lens-grid"
+          id="lensGrid"
+        >
+
+          <button
+            class="lens active"
+            data-lens="jee"
+          >
+
+            <small>
+              01 · JEE
+            </small>
+
+            <h3>
+              Mechanism →
+              equation →
+              problem
+            </h3>
+
+            <p>
+              Focus on quantitative reasoning, patterns,
+              derivations and linking chemistry to physics.
+            </p>
+
+            <span>
+              Use this lens →
+            </span>
+
+          </button>
+
+
+          <button
+            class="lens"
+            data-lens="neet"
+          >
+
+            <small>
+              02 · NEET
+            </small>
+
+            <h3>
+              Concept →
+              recall →
+              application
+            </h3>
+
+            <p>
+              Use the deeper lecture to strengthen conceptual
+              memory before rapid exam practice.
+            </p>
+
+            <span>
+              Use this lens →
+            </span>
+
+          </button>
+
+
+          <button
+            class="lens"
+            data-lens="mit"
+          >
+
+            <small>
+              03 · MIT
+            </small>
+
+            <h3>
+              Model →
+              assumption →
+              consequence
+            </h3>
+
+            <p>
+              Slow down. Ask what the system is actually doing
+              and what changes the model.
+            </p>
+
+            <span>
+              Use this lens →
+            </span>
+
+          </button>
+
+        </div>
+
+
+        <div
+          class="lens-detail"
+          id="lensDetail"
+        >
+
+          <div class="detail-index">
+            JEE / STUDY VIEW
+          </div>
+
+          <div>
+
+            <h3>
+              When a lecture gets difficult,
+              turn it into a problem.
+            </h3>
+
+            <p>
+              Pause at each new idea. Write the physical
+              situation, define the variables, then ask what
+              quantity should be conserved or minimized.
+            </p>
+
+          </div>
+
+          <div class="detail-list">
+
+            <span>
+              01&nbsp; Identify the system
+            </span>
+
+            <span>
+              02&nbsp; Sketch the particles
+            </span>
+
+            <span>
+              03&nbsp; Write the relation
+            </span>
+
+            <span>
+              04&nbsp; Test with a question
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         LECTURE LAB
+    ===================================================== -->
+
+    <section
+      class="section paper"
+      id="lectures"
+    >
+
+      <div class="wrap">
+
+        <div class="heading split-heading">
+
+          <div>
+
+            <p class="kicker">
+              <span></span>
+              ORIGINAL SOURCE
+            </p>
+
+            <h2>
+              The lecture archive is the
+              <em>starting point.</em>
+            </h2>
+
+          </div>
+
+
+          <p>
+            Keep the source material visible. This interface adds
+            navigation, visual reminders and an exam-oriented
+            study layer without pretending to be the original course.
+          </p>
+
+        </div>
+
+
+        <div class="lecture-layout">
+
+
+          <!-- VIDEO -->
+
+          <div class="video-card">
+
+            <div class="video-head">
+
+              <span>
+                PLAYLIST
+              </span>
+
+              <a
+                href="https://www.youtube.com/playlist?list=PLF83B8D8C87426E44"
+                target="_blank"
+                rel="noopener"
+              >
+                YouTube ↗
+              </a>
+
+            </div>
+
+
+            <div class="video">
+
+              <iframe
+                src="https://www.youtube.com/embed/videoseries?list=PLF83B8D8C87426E44"
+                title="Chemistry lecture playlist"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen
+              ></iframe>
+
+            </div>
+
+          </div>
+
+
+          <!-- SIDE NOTE -->
+
+          <aside class="side-note">
+
+            <span class="eyebrow-number">
+              01
+            </span>
+
+            <h3>
+              Watch for the
+              <em>mechanism.</em>
+            </h3>
+
+            <p>
+              Don't write every sentence. Capture the idea
+              the lecturer is trying to make inevitable.
+            </p>
+
+
+            <div class="question-stack">
+
+              <button>
+                What is moving?
+              </button>
+
+              <button>
+                What creates the driving force?
+              </button>
+
+              <button>
+                Where does the energy go?
+              </button>
+
+              <button>
+                What changes at equilibrium?
+              </button>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+
+        <!-- LECTURE FLOW -->
+
+        <div class="lecture-flow">
+
+          <div>
+
+            <span>
+              01
+            </span>
+
+            <b>
+              Watch
+            </b>
+
+            <p>
+              Use the original lecture.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              02
+            </span>
+
+            <b>
+              Mark
+            </b>
+
+            <p>
+              Pause at the conceptual turns.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              03
+            </span>
+
+            <b>
+              Map
+            </b>
+
+            <p>
+              Attach it to your exam chapter.
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <span>
+              04
+            </span>
+
+            <b>
+              Practice
+            </b>
+
+            <p>
+              Finish with problems.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         PERIODIC TABLE
+    ===================================================== -->
+
+    <section
+      class="section elements-section"
+      id="elements"
+    >
+
+      <div class="wrap">
+
+        <div class="heading split-heading">
+
+          <div>
+
+            <p class="kicker">
+
+              <span></span>
+
+              INTERACTIVE PERIODIC TABLE
+
+            </p>
+
+
+            <h2>
+
+              Don't memorize the table.
+              <br>
+
+              <em>Read its structure.</em>
+
+            </h2>
+
+          </div>
+
+
+          <p>
+
+            Click an element to inspect its position,
+            category and suggested study lens.
+            The interface is intentionally lightweight
+            so it remains fast on GitHub Pages.
+
+          </p>
+
+        </div>
+
+
+        <!-- TOOLS -->
+
+        <div class="element-tools">
+
+          <label class="search">
+
+            <span>
+              ⌕
+            </span>
+
+            <input
+              id="elementSearch"
+              placeholder="Search element or symbol…"
+              autocomplete="off"
+            >
+
+          </label>
+
+
+          <div
+            class="filters"
+            id="elementFilters"
+          >
+
+            <button
+              class="filter active"
+              data-filter="all"
+            >
+              All
+            </button>
+
+            <button
+              class="filter"
+              data-filter="alkali"
+            >
+              Alkali
+            </button>
+
+            <button
+              class="filter"
+              data-filter="transition"
+            >
+              Transition
+            </button>
+
+            <button
+              class="filter"
+              data-filter="nonmetal"
+            >
+              Nonmetal
+            </button>
+
+            <button
+              class="filter"
+              data-filter="halogen"
+            >
+              Halogen
+            </button>
+
+            <button
+              class="filter"
+              data-filter="noble"
+            >
+              Noble gas
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- PERIODIC TABLE -->
+
+        <div class="periodic-shell">
+
+          <div
+            class="periodic"
+            id="periodic"
+          ></div>
+
+
+          <aside
+            class="element-card"
+            id="elementCard"
+          >
+
+            <div
+              class="element-symbol"
+              id="detailSymbol"
+            >
+              H
+            </div>
+
+            <div
+              class="element-number"
+              id="detailNumber"
+            >
+              1 · HYDROGEN
+            </div>
+
+            <h3 id="detailName">
+              Hydrogen
+            </h3>
+
+
+            <div class="element-facts">
+
+              <span>
+                <b id="detailGroup">
+                  1
+                </b>
+                group
+              </span>
+
+              <span>
+                <b id="detailPeriod">
+                  1
+                </b>
+                period
+              </span>
+
+              <span id="detailCategory">
+                nonmetal
+              </span>
+
+            </div>
+
+
+            <p id="detailText">
+
+              Start here: position tells you something about
+              behaviour. Compare an element with its neighbours
+              before memorising isolated facts.
+
+            </p>
+
+
+            <div
+              class="study-tag"
+              id="detailTag"
+            >
+              STUDY LENS · PERIODIC TRENDS
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         VISUAL CHEMISTRY METHOD
+    ===================================================== -->
+
+    <section
+      class="section visual-section"
+      id="method"
+    >
+
+      <div class="wrap method-grid">
+
+        <div>
+
+          <p class="kicker">
+
+            <span></span>
+
+            THE STUDY METHOD
+
+          </p>
+
+
+          <h2>
+
+            Watch.
+            <br>
+
+            <em>Visualize.</em>
+            <br>
+
+            Apply.
+
+          </h2>
+
+
+          <p class="method-copy">
+
+            The site should feel like a visual notebook,
+            not a coaching brochure. Every difficult lecture
+            becomes a repeatable learning loop.
+
+          </p>
+
+
+          <button
+            class="button ghost"
+            id="pauseVisual"
+          >
+            Pause visual
+          </button>
+
+        </div>
+
+
+        <!-- MODEL -->
+
+        <div class="visual-notebook">
+
+          <div class="notebook-head">
+
+            <span>
+              LIVE MODEL
+            </span>
+
+            <span id="visualStatus">
+              RUNNING
+            </span>
+
+          </div>
+
+
+          <canvas
+            id="modelCanvas"
+            aria-hidden="true"
+          ></canvas>
+
+
+          <div class="model-label anode">
+            ANODE
+          </div>
+
+          <div class="model-label cathode">
+            CATHODE
+          </div>
+
+          <div class="model-label electrolyte">
+            ELECTROLYTE
+          </div>
+
+
+          <div class="model-equation">
+            electrons → external circuit
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         ABOUT
+    ===================================================== -->
+
+    <section
+      class="section about"
+      id="about"
+    >
+
+      <div class="wrap">
+
+        <div class="heading">
+
+          <p class="kicker">
+
+            <span></span>
+
+            ABOUT THE SOURCE
+
+          </p>
+
+
+          <h2>
+
+            Donald R. Sadoway
+            <br>
+
+            <em>lecture companion.</em>
+
+          </h2>
+
+
+          <p>
+
+            This page is an independent learning interface
+            for publicly available lecture material. Use the
+            original source for the authoritative lecture,
+            attribution and institutional context.
+
+          </p>
+
+        </div>
+
+
+        <div class="about-grid">
+
+          <article>
+
+            <span>
+              01
+            </span>
+
+            <h3>
+              First principles
+            </h3>
+
+            <p>
+              Start with the physical system before
+              manipulating symbols.
+            </p>
+
+          </article>
+
+
+          <article>
+
+            <span>
+              02
+            </span>
+
+            <h3>
+              Materials + chemistry
+            </h3>
+
+            <p>
+              Look for the connection between microscopic
+              behaviour and measurable properties.
+            </p>
+
+          </article>
+
+
+          <article>
+
+            <span>
+              03
+            </span>
+
+            <h3>
+              Depth without losing the exam
+            </h3>
+
+            <p>
+              Use advanced explanations as a foundation,
+              then return to the level of the question
+              in front of you.
+            </p>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ====================================================
+         ENQUIRY
+    ===================================================== -->
+
+    <section
+      class="section enquiry"
+      id="enquiry"
+    >
+
+      <div class="wrap enquiry-grid">
+
+        <div>
+
+          <p class="kicker">
+
+            <span></span>
+
+            YOUR NEXT STEP
+
+          </p>
+
+
+          <h2>
+
+            What are you
+            preparing
+            <em>for?</em>
+
+          </h2>
+
+
+          <p>
+
+            Use this enquiry form as a front-end capture point.
+            Connect it later to your Google Form, Formspree,
+            Apps Script or WhatsApp number.
+
+          </p>
+
+        </div>
+
+
+        <form id="enquiryForm">
+
+          <label>
+
+            Student name
+
+            <input
+              id="studentName"
+              required
+              placeholder="Your name"
+            >
+
+          </label>
+
+
+          <label>
+
+            Mobile number
+
+            <input
+              id="studentPhone"
+              required
+              inputmode="tel"
+              placeholder="+91 …"
+            >
+
+          </label>
+
+
+          <label>
+
+            Goal
+
+            <select
+              id="studentGoal"
+              required
+            >
+
+              <option value="">
+                Choose one
+              </option>
+
+              <option>
+                JEE
+              </option>
+
+              <option>
+                NEET
+              </option>
+
+              <option>
+                MIT / university-level
+              </option>
+
+            </select>
+
+          </label>
+
+
+          <button
+            class="submit"
+            type="submit"
+          >
+            Create enquiry message →
+          </button>
+
+
+          <p
+            class="form-message"
+            id="formMessage"
+          ></p>
+
+        </form>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- ======================================================
+       FOOTER
+  ======================================================= -->
+
+  <footer class="footer">
+
+    <div class="wrap footer-grid">
+
+      <div>
+
+        <a
+          class="brand"
+          href="#"
+        >
+
+          <span
+            class="brand-glyph"
+            aria-hidden="true"
+          >
+            <i></i>
+            <i></i>
+            <i></i>
+          </span>
+
+          <span>
+
+            SADOWAY
+            <small>
+              CHEMISTRY LAB
+            </small>
+
+          </span>
+
+        </a>
+
+
+        <p>
+
+          Independent educational interface ·
+          GitHub Pages · designed for curious
+          chemistry students.
+
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          EXPLORE
+        </span>
+
+        <a href="#lectures">
+          Lectures
+        </a>
+
+        <a href="#elements">
+          Elements
+        </a>
+
+        <a href="#method">
+          Method
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          SOURCE
+        </span>
+
+        <a
+          href="https://www.youtube.com/playlist?list=PLF83B8D8C87426E44"
+          target="_blank"
+          rel="noopener"
+        >
+          Original playlist ↗
+        </a>
+
+        <a
+          href="https://github.com/saemsir/chemistry"
+          target="_blank"
+          rel="noopener"
+        >
+          GitHub ↗
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="wrap footer-bottom">
+
+      <span>
+        © <span id="year"></span>
+        Chemistry Lab
+      </span>
+
+      <span>
+        Built for the web · built to learn
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- BACK TO TOP -->
+
+  <button
+    class="top"
+    id="top"
+    aria-label="Back to top"
+  >
+    ↑
+  </button>
+
+
+  <script src="script.js"></script>
+
+</body>
+      </html>
