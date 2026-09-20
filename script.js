@@ -1,995 +1,671 @@
 "use strict";
 
-/* ======================================================
-   HELPERS
-====================================================== */
+/*
+========================================================
+CHEMISTRY WEBSITE CONFIGURATION
+========================================================
 
-const $ = (selector) =>
-  document.querySelector(selector);
+Put your real contact details here.
 
-const $$ = (selector) =>
-  Array.from(
-    document.querySelectorAll(selector)
+Examples:
+
+whatsapp:
+"919876543210"
+
+telegram:
+"https://t.me/yourusername"
+
+email:
+"your@email.com"
+
+googleForm:
+"https://docs.google.com/forms/d/e/YOUR_FORM_ID/viewform"
+
+Leave anything blank if you don't have it yet.
+========================================================
+*/
+
+
+const CONFIG = {
+
+  whatsapp: "",
+
+  telegram: "",
+
+  email: "",
+
+  googleForm: ""
+
+};
+
+
+const PLAYLIST_ID = "PL36EC6A6180271B0F";
+
+
+/*
+========================================================
+LECTURES
+
+These video IDs have been verified as videos associated
+with the MIT 3.091SC Fall 2010 YouTube archive.
+
+For lectures where an exact topic title has not been
+verified here, we intentionally use "Lecture X" rather
+than inventing a topic.
+========================================================
+*/
+
+
+const lectures = [
+
+  {
+    n: "01",
+    title: "Foundations",
+    sub: "Course introduction",
+    id: "vPQ9a_xIqRg",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "02",
+    title: "Periodic table",
+    sub: "Periodic patterns",
+    id: "h57hFAsLAGo",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "03",
+    title: "Lecture 3",
+    sub: "MIT 3.091SC",
+    id: "Io_4ZckeQ1k",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "04",
+    title: "Lecture 4",
+    sub: "MIT 3.091SC",
+    id: "5l_S8WwBVnM",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "05",
+    title: "Lecture 5",
+    sub: "MIT 3.091SC",
+    id: "K30HeE8fEq8",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "06",
+    title: "Lecture 6",
+    sub: "MIT 3.091SC",
+    id: "giPLtjL0Mnc",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "07",
+    title: "Aufbau principle",
+    sub: "Photoelectron spectroscopy",
+    id: "c_4dDw7iLn8",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "08",
+    title: "Ionic crystals",
+    sub: "Born–Haber cycle",
+    id: "kZJgJCxcHZE",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "09",
+    title: "Lecture 9",
+    sub: "MIT 3.091SC",
+    id: "up3zP2z81SE",
+    tags: ["jee", "neet", "deeper"]
+  },
+
+  {
+    n: "10",
+    title: "Lecture 10",
+    sub: "MIT 3.091SC",
+    id: "wyoFOdR64U8",
+    tags: ["jee", "neet", "deeper"]
+  }
+
+];
+
+
+/*
+========================================================
+DOM
+========================================================
+*/
+
+
+const siteHeader =
+  document.getElementById("siteHeader");
+
+const menuToggle =
+  document.getElementById("menuToggle");
+
+const mainNav =
+  document.getElementById("mainNav");
+
+const announcementClose =
+  document.getElementById("announcementClose");
+
+const announcement =
+  document.getElementById("announcement");
+
+const backTop =
+  document.getElementById("backTop");
+
+
+/*
+========================================================
+STICKY HEADER
+========================================================
+*/
+
+
+function updateHeader() {
+
+  if (!siteHeader) return;
+
+  if (window.scrollY > 20) {
+
+    siteHeader.classList.add("scrolled");
+
+  } else {
+
+    siteHeader.classList.remove("scrolled");
+
+  }
+}
+
+
+window.addEventListener(
+  "scroll",
+  updateHeader,
+  { passive: true }
+);
+
+
+updateHeader();
+
+
+/*
+========================================================
+MOBILE MENU
+========================================================
+*/
+
+
+if (menuToggle && mainNav) {
+
+  menuToggle.addEventListener(
+    "click",
+    () => {
+
+      const open =
+        mainNav.classList.toggle("open");
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+    }
   );
 
 
-/* ======================================================
-   HEADER
-====================================================== */
+  mainNav
+    .querySelectorAll("a")
+    .forEach(link => {
 
-const header = $("#header");
-const topBtn = $("#top");
-const menu = $("#menu");
-const nav = $("#nav");
+      link.addEventListener(
+        "click",
+        () => {
+
+          mainNav.classList.remove("open");
+
+          menuToggle.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        }
+      );
+
+    });
+
+}
+
+
+/*
+========================================================
+ANNOUNCEMENT CLOSE
+========================================================
+*/
+
+
+if (announcementClose) {
+
+  announcementClose.addEventListener(
+    "click",
+    () => {
+
+      if (announcement) {
+
+        announcement.style.display = "none";
+
+      }
+
+    }
+  );
+
+}
+
+
+/*
+========================================================
+BACK TO TOP
+========================================================
+*/
+
 
 window.addEventListener(
   "scroll",
   () => {
 
-    header.classList.toggle(
-      "scrolled",
-      window.scrollY > 18
-    );
+    if (window.scrollY > 500) {
 
-    topBtn.classList.toggle(
-      "show",
-      window.scrollY > 650
-    );
+      backTop.classList.add("show");
+
+    } else {
+
+      backTop.classList.remove("show");
+
+    }
 
   },
-  {
-    passive: true
-  }
+  { passive: true }
 );
 
 
-topBtn.addEventListener(
-  "click",
-  () => {
+if (backTop) {
 
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
+  backTop.addEventListener(
+    "click",
+    () => {
 
-  }
-);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-
-menu.addEventListener(
-  "click",
-  () => {
-
-    nav.classList.toggle(
-      "open"
-    );
-
-  }
-);
-
-
-$$("nav a").forEach(
-  link => {
-
-    link.addEventListener(
-      "click",
-      () => {
-
-        nav.classList.remove(
-          "open"
-        );
-
-      }
-    );
-
-  }
-);
-
-
-/* ======================================================
-   ANNOUNCEMENT
-====================================================== */
-
-const notice =
-  $("#notice");
-
-const noticeClose =
-  $("#noticeClose");
-
-noticeClose.addEventListener(
-  "click",
-  () => {
-
-    notice.remove();
-
-    localStorage.setItem(
-      "chemistryNoticeClosed",
-      "1"
-    );
-
-  }
-);
-
-
-if (
-  localStorage.getItem(
-    "chemistryNoticeClosed"
-  )
-) {
-
-  notice?.remove();
+    }
+  );
 
 }
 
 
-/* ======================================================
-   YEAR
-====================================================== */
+/*
+========================================================
+REVEAL ANIMATIONS
+========================================================
+*/
 
-$("#year").textContent =
-  new Date().getFullYear();
+
+const revealTargets =
+  document.querySelectorAll(
+    ".section-heading, .idea-card, .method-step, .pathway-card, .source-card, .contact-grid"
+  );
 
 
-/* ======================================================
-   COUNTERS
-====================================================== */
-
-const countObserver =
+const revealObserver =
   new IntersectionObserver(
     entries => {
 
-      if (
-        !entries[0].isIntersecting
-      ) {
-        return;
-      }
+      entries.forEach(
+        entry => {
 
-      $$("[data-count]").forEach(
-        element => {
+          if (
+            entry.isIntersecting
+          ) {
 
-          const target =
-            Number(
-              element.dataset.count
+            entry.target.classList.add(
+              "reveal",
+              "visible"
             );
 
-          const start =
-            performance.now();
+            revealObserver.unobserve(
+              entry.target
+            );
 
-          const duration =
-            1000;
-
-
-          const tick = now => {
-
-            const progress =
-              Math.min(
-                (now - start) /
-                duration,
-                1
-              );
-
-
-            const eased =
-              1 -
-              Math.pow(
-                1 - progress,
-                3
-              );
-
-
-            element.textContent =
-              Math.round(
-                target * eased
-              ).toLocaleString();
-
-
-            if (
-              progress < 1
-            ) {
-
-              requestAnimationFrame(
-                tick
-              );
-
-            }
-
-          };
-
-
-          requestAnimationFrame(
-            tick
-          );
+          }
 
         }
       );
-
-
-      countObserver.disconnect();
 
     },
     {
-      threshold: .3
+      threshold: 0.08
     }
   );
 
 
-countObserver.observe(
-  document.querySelector(".stats")
-);
+revealTargets.forEach(
+  element => {
 
+    element.classList.add("reveal");
 
-/* ======================================================
-   LEARNING LENS
-====================================================== */
-
-const lensData = {
-
-  jee: {
-
-    label:
-      "JEE / STUDY VIEW",
-
-    title:
-      "When a lecture gets difficult, turn it into a problem.",
-
-    text:
-      "Pause at each new idea. Write the physical situation, define the variables, then ask what quantity should be conserved or minimized.",
-
-    list: [
-      "Identify the system",
-      "Sketch the particles",
-      "Write the relation",
-      "Test with a question"
-    ]
-
-  },
-
-
-  neet: {
-
-    label:
-      "NEET / STUDY VIEW",
-
-    title:
-      "When a lecture gets dense, build one clean mental picture.",
-
-    text:
-      "Use a deep explanation to create a stable concept, then compress it into a small set of facts, patterns and application questions.",
-
-    list: [
-      "Name the phenomenon",
-      "Draw the process",
-      "Recall the key pattern",
-      "Solve a quick question"
-    ]
-
-  },
-
-
-  mit: {
-
-    label:
-      "MIT / STUDY VIEW",
-
-    title:
-      "When a model works, ask what assumptions made it work.",
-
-    text:
-      "Treat the lecture as a model-building exercise: define the system, identify assumptions, then examine what changes when one assumption is relaxed.",
-
-    list: [
-      "Define the system",
-      "State assumptions",
-      "Predict the consequence",
-      "Check the model"
-    ]
-
-  }
-
-};
-
-
-$$(".lens").forEach(
-  button => {
-
-    button.addEventListener(
-      "click",
-      () => {
-
-        $$(".lens").forEach(
-          item =>
-            item.classList.remove(
-              "active"
-            )
-        );
-
-
-        button.classList.add(
-          "active"
-        );
-
-
-        const data =
-          lensData[
-            button.dataset.lens
-          ];
-
-
-        const detail =
-          $("#lensDetail");
-
-
-        detail
-          .querySelector(
-            ".detail-index"
-          )
-          .textContent =
-          data.label;
-
-
-        detail
-          .querySelector("h3")
-          .textContent =
-          data.title;
-
-
-        detail
-          .querySelector("p")
-          .textContent =
-          data.text;
-
-
-        detail
-          .querySelector(
-            ".detail-list"
-          )
-          .innerHTML =
-          data.list
-            .map(
-              (item,index) =>
-                "<span>0" +
-                (index + 1) +
-                "&nbsp; " +
-                item +
-                "</span>"
-            )
-            .join("");
-
-      }
-    );
+    revealObserver.observe(element);
 
   }
 );
 
 
-/* ======================================================
-   PERIODIC TABLE DATA
-====================================================== */
-
-const periods = [
-
-  [
-    "H", null, null, null, null, null,
-    null, null, null, null, null, null,
-    null, null, null, null, null, "He"
-  ],
-
-  [
-    "Li", "Be", null, null, null, null,
-    null, null, null, null, null, null,
-    "B", "C", "N", "O", "F", "Ne"
-  ],
-
-  [
-    "Na", "Mg", null, null, null, null,
-    null, null, null, null, null, null,
-    "Al", "Si", "P", "S", "Cl", "Ar"
-  ],
-
-  [
-    "K", "Ca", "Sc", "Ti", "V", "Cr",
-    "Mn", "Fe", "Co", "Ni", "Cu", "Zn",
-    "Ga", "Ge", "As", "Se", "Br", "Kr"
-  ],
-
-  [
-    "Rb", "Sr", "Y", "Zr", "Nb", "Mo",
-    "Tc", "Ru", "Rh", "Pd", "Ag", "Cd",
-    "In", "Sn", "Sb", "Te", "I", "Xe"
-  ],
-
-  [
-    "Cs", "Ba", "La", "Hf", "Ta", "W",
-    "Re", "Os", "Ir", "Pt", "Au", "Hg",
-    "Tl", "Pb", "Bi", "Po", "At", "Rn"
-  ],
-
-  [
-    "Fr", "Ra", "Ac", "Rf", "Db", "Sg",
-    "Bh", "Hs", "Mt", "Ds", "Rg", "Cn",
-    "Nh", "Fl", "Mc", "Lv", "Ts", "Og"
-  ]
-
-];
+/*
+========================================================
+LECTURE SYSTEM
+========================================================
+*/
 
 
-const lanthanides = [
-  "La", "Ce", "Pr", "Nd", "Pm",
-  "Sm", "Eu", "Gd", "Tb", "Dy",
-  "Ho", "Er", "Tm", "Yb", "Lu"
-];
+const lectureList =
+  document.getElementById(
+    "lectureList"
+  );
 
+const lectureSearch =
+  document.getElementById(
+    "lectureSearch"
+  );
 
-const actinides = [
-  "Ac", "Th", "Pa", "U", "Np",
-  "Pu", "Am", "Cm", "Bk", "Cf",
-  "Es", "Fm", "Md", "No", "Lr"
-];
-
-
-const names = {
-
-  H: "Hydrogen",
-  He: "Helium",
-
-  Li: "Lithium",
-  Be: "Beryllium",
-  B: "Boron",
-  C: "Carbon",
-  N: "Nitrogen",
-  O: "Oxygen",
-  F: "Fluorine",
-  Ne: "Neon",
-
-  Na: "Sodium",
-  Mg: "Magnesium",
-  Al: "Aluminium",
-  Si: "Silicon",
-  P: "Phosphorus",
-  S: "Sulfur",
-  Cl: "Chlorine",
-  Ar: "Argon",
-
-  K: "Potassium",
-  Ca: "Calcium",
-  Sc: "Scandium",
-  Ti: "Titanium",
-  V: "Vanadium",
-  Cr: "Chromium",
-  Mn: "Manganese",
-  Fe: "Iron",
-  Co: "Cobalt",
-  Ni: "Nickel",
-  Cu: "Copper",
-  Zn: "Zinc",
-
-  Ga: "Gallium",
-  Ge: "Germanium",
-  As: "Arsenic",
-  Se: "Selenium",
-  Br: "Bromine",
-  Kr: "Krypton",
-
-  Rb: "Rubidium",
-  Sr: "Strontium",
-  Y: "Yttrium",
-  Zr: "Zirconium",
-  Nb: "Niobium",
-  Mo: "Molybdenum",
-  Tc: "Technetium",
-  Ru: "Ruthenium",
-  Rh: "Rhodium",
-  Pd: "Palladium",
-  Ag: "Silver",
-  Cd: "Cadmium",
-
-  In: "Indium",
-  Sn: "Tin",
-  Sb: "Antimony",
-  Te: "Tellurium",
-  I: "Iodine",
-  Xe: "Xenon",
-
-  Cs: "Cesium",
-  Ba: "Barium",
-  La: "Lanthanum",
-  Ce: "Cerium",
-  Pr: "Praseodymium",
-  Nd: "Neodymium",
-  Pm: "Promethium",
-  Sm: "Samarium",
-  Eu: "Europium",
-  Gd: "Gadolinium",
-  Tb: "Terbium",
-  Dy: "Dysprosium",
-  Ho: "Holmium",
-  Er: "Erbium",
-  Tm: "Thulium",
-  Yb: "Ytterbium",
-  Lu: "Lutetium",
-
-  Hf: "Hafnium",
-  Ta: "Tantalum",
-  W: "Tungsten",
-  Re: "Rhenium",
-  Os: "Osmium",
-  Ir: "Iridium",
-  Pt: "Platinum",
-  Au: "Gold",
-  Hg: "Mercury",
-
-  Tl: "Thallium",
-  Pb: "Lead",
-  Bi: "Bismuth",
-  Po: "Polonium",
-  At: "Astatine",
-  Rn: "Radon",
-
-  Fr: "Francium",
-  Ra: "Radium",
-  Ac: "Actinium",
-  Th: "Thorium",
-  Pa: "Protactinium",
-  U: "Uranium",
-  Np: "Neptunium",
-  Pu: "Plutonium",
-  Am: "Americium",
-  Cm: "Curium",
-  Bk: "Berkelium",
-  Cf: "Californium",
-  Es: "Einsteinium",
-  Fm: "Fermium",
-  Md: "Mendelevium",
-  No: "Nobelium",
-  Lr: "Lawrencium",
-
-  Rf: "Rutherfordium",
-  Db: "Dubnium",
-  Sg: "Seaborgium",
-  Bh: "Bohrium",
-  Hs: "Hassium",
-  Mt: "Meitnerium",
-  Ds: "Darmstadtium",
-  Rg: "Roentgenium",
-  Cn: "Copernicium",
-  Nh: "Nihonium",
-  Fl: "Flerovium",
-  Mc: "Moscovium",
-  Lv: "Livermorium",
-  Ts: "Tennessine",
-  Og: "Oganesson"
-
-};
-
-
-/* ======================================================
-   ELEMENT CATEGORIES
-====================================================== */
-
-const alkali =
-  new Set([
-    "Li",
-    "Na",
-    "K",
-    "Rb",
-    "Cs",
-    "Fr"
-  ]);
-
-
-const noble =
-  new Set([
-    "He",
-    "Ne",
-    "Ar",
-    "Kr",
-    "Xe",
-    "Rn",
-    "Og"
-  ]);
-
-
-const halogen =
-  new Set([
-    "F",
-    "Cl",
-    "Br",
-    "I",
-    "At",
-    "Ts"
-  ]);
-
-
-const nonmetal =
-  new Set([
-    "H",
-    "C",
-    "N",
-    "O",
-    "P",
-    "S",
-    "Se"
-  ]);
-
-
-const transition =
-  new Set(
-    periods
-      .slice(3)
-      .flat()
-      .filter(Boolean)
-      .filter(
-        (symbol,index) =>
-          index < 20
-      )
+const filterButtons =
+  document.querySelectorAll(
+    ".filter-button"
   );
 
 
-function category(symbol) {
+const player =
+  document.getElementById(
+    "youtubePlayer"
+  );
+
+const playerNumber =
+  document.getElementById(
+    "playerNumber"
+  );
+
+const playerTitle =
+  document.getElementById(
+    "playerTitle"
+  );
+
+const playerSubtitle =
+  document.getElementById(
+    "playerSubtitle"
+  );
+
+const nextLecture =
+  document.getElementById(
+    "nextLecture"
+  );
+
+
+let activeFilter = "all";
+
+let currentLectureIndex = 0;
+
+
+/*
+Create lecture card.
+*/
+
+
+function createLectureCard(
+  lecture,
+  originalIndex
+) {
+
+  const button =
+    document.createElement("button");
+
+  button.type = "button";
+
+  button.className =
+    "lecture-item";
+
+  button.dataset.index =
+    String(originalIndex);
+
 
   if (
-    alkali.has(symbol)
+    originalIndex ===
+    currentLectureIndex
   ) {
-    return "alkali";
+
+    button.classList.add("active");
+
   }
 
-  if (
-    noble.has(symbol)
-  ) {
-    return "noble";
-  }
 
-  if (
-    halogen.has(symbol)
-  ) {
-    return "halogen";
-  }
+  button.innerHTML = `
 
-  if (
-    nonmetal.has(symbol)
-  ) {
-    return "nonmetal";
-  }
+    <span class="lecture-item-number">
+      ${lecture.n}
+    </span>
 
-  if (
-    transition.has(symbol)
-  ) {
-    return "transition";
-  }
+    <span>
 
-  return "other";
+      <h4>
+        ${escapeHTML(lecture.title)}
+      </h4>
+
+      <p>
+        ${escapeHTML(lecture.sub)}
+      </p>
+
+    </span>
+
+  `;
+
+
+  button.addEventListener(
+    "click",
+    () => {
+
+      loadLecture(originalIndex);
+
+    }
+  );
+
+
+  return button;
 }
 
 
-/* ======================================================
-   POSITIONS
-====================================================== */
-
-const atomicSymbols =
-  periods
-    .flat()
-    .filter(Boolean)
-    .concat(
-      lanthanides,
-      actinides
-    );
+/*
+Escape HTML so future titles
+cannot accidentally inject markup.
+*/
 
 
-const positions = [];
+function escapeHTML(value) {
+
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
 
 
-periods.forEach(
-  (row, periodIndex) => {
-
-    row.forEach(
-      (symbol, groupIndex) => {
-
-        if (!symbol) {
-          return;
-        }
-
-        positions.push({
-          symbol,
-          row:
-            periodIndex + 1,
-          col:
-            groupIndex + 1
-        });
-
-      }
-    );
-
-  }
-);
+/*
+Render lecture list.
+*/
 
 
-lanthanides.forEach(
-  (symbol,index) => {
+function renderLectures() {
 
-    positions.push({
-      symbol,
-      row: 9,
-      col: index + 4
-    });
-
-  }
-);
+  if (!lectureList) return;
 
 
-actinides.forEach(
-  (symbol,index) => {
-
-    positions.push({
-      symbol,
-      row: 10,
-      col: index + 4
-    });
-
-  }
-);
+  const query =
+    (lectureSearch?.value || "")
+      .trim()
+      .toLowerCase();
 
 
-/* ======================================================
-   ELEMENT STUDY TEXT
-====================================================== */
-
-const detailText = {
-
-  alkali:
-    "Compare how one extra electron changes reactivity down a group. Use this as a prompt for periodic trends rather than a memorisation table.",
-
-  noble:
-    "Use the column position to reason about valence structure and why these elements behave differently from neighbouring groups.",
-
-  halogen:
-    "Track what happens as the outer shell approaches a full configuration; compare size and reactivity down the group.",
-
-  nonmetal:
-    "Start with bonding and electron sharing. Compare neighbours to build a trend instead of memorising a list.",
-
-  transition:
-    "Ask how partially filled d orbitals relate to variable oxidation states, colour and coordination behaviour.",
-
-  other:
-    "Use position, neighbourhood and periodic trends as your first three clues."
-
-};
+  lectureList.innerHTML = "";
 
 
-/* ======================================================
-   RENDER PERIODIC TABLE
-====================================================== */
-
-const periodic =
-  $("#periodic");
+  let visibleCount = 0;
 
 
-function renderTable(
-  filter = "all",
-  search = ""
-) {
+  lectures.forEach(
+    (lecture, index) => {
 
-  periodic.innerHTML =
-    "";
-
-
-  positions.forEach(
-    item => {
-
-      const type =
-        category(
-          item.symbol
-        );
+      const matchesFilter =
+        activeFilter === "all" ||
+        lecture.tags.includes(activeFilter);
 
 
-      const filterMatches =
-        filter === "all" ||
-        type === filter;
-
-
-      const needle =
-        search
-          .trim()
+      const haystack =
+        `${lecture.title} ${lecture.sub} ${lecture.n}`
           .toLowerCase();
 
 
-      const searchMatches =
-        !needle ||
-        item.symbol
-          .toLowerCase()
-          .includes(
-            needle
-          ) ||
-        (
-          names[item.symbol] || ""
-        )
-          .toLowerCase()
-          .includes(
-            needle
+      const matchesSearch =
+        !query ||
+        haystack.includes(query);
+
+
+      if (
+        matchesFilter &&
+        matchesSearch
+      ) {
+
+        const card =
+          createLectureCard(
+            lecture,
+            index
           );
 
+        lectureList.appendChild(card);
 
-      const atomicNumber =
-        atomicSymbols.indexOf(
-          item.symbol
-        ) + 1;
+        visibleCount++;
 
-
-      const element =
-        document.createElement(
-          "button"
-        );
-
-
-      element.className =
-        "element " +
-        type +
-        (
-          filterMatches &&
-          searchMatches
-            ? ""
-            : " dim"
-        );
-
-
-      element.style.gridColumn =
-        item.col;
-
-      element.style.gridRow =
-        item.row;
-
-
-      element.innerHTML = `
-
-        <span class="z">
-          ${atomicNumber}
-        </span>
-
-        <span class="sym">
-          ${item.symbol}
-        </span>
-
-        <span class="name">
-          ${names[item.symbol] || item.symbol}
-        </span>
-
-      `;
-
-
-      element.addEventListener(
-        "click",
-        () => {
-
-          selectElement(
-            item.symbol,
-            atomicNumber,
-            item.row,
-            item.col,
-            type
-          );
-
-        }
-      );
-
-
-      periodic.appendChild(
-        element
-      );
-
-    }
-  );
-
-}
-
-
-/* ======================================================
-   ELEMENT DETAIL
-====================================================== */
-
-function selectElement(
-  symbol,
-  atomicNumber,
-  row,
-  column,
-  type
-) {
-
-  $$(".element").forEach(
-    element => {
-
-      element.classList.toggle(
-        "selected",
-        element
-          .querySelector(
-            ".sym"
-          )
-          ?.textContent ===
-        symbol
-      );
+      }
 
     }
   );
 
 
-  $("#detailSymbol")
-    .textContent =
-    symbol;
+  if (visibleCount === 0) {
 
+    lectureList.innerHTML = `
 
-  $("#detailNumber")
-    .textContent =
-    atomicNumber +
-    " · " +
-    (
-      names[symbol] ||
-      symbol
-    ).toUpperCase();
+      <div
+        style="
+          padding:30px;
+          color:#6c6d65;
+          font-size:13px;
+        "
+      >
+        No lecture found.
+      </div>
 
+    `;
 
-  $("#detailName")
-    .textContent =
-    names[symbol] ||
-    symbol;
-
-
-  $("#detailGroup")
-    .textContent =
-    column;
-
-
-  $("#detailPeriod")
-    .textContent =
-    row;
-
-
-  $("#detailCategory")
-    .textContent =
-    type;
-
-
-  $("#detailText")
-    .textContent =
-    detailText[type] ||
-    detailText.other;
-
-
-  const tag =
-    type === "transition"
-      ? "STRUCTURE + BONDING"
-      : type === "noble"
-        ? "PERIODIC TRENDS"
-        : type;
-
-
-  $("#detailTag")
-    .textContent =
-    "STUDY LENS · " +
-    tag.toUpperCase();
+  }
 
 }
 
 
-/* INITIAL TABLE */
-
-renderTable();
-
-
-/* ======================================================
-   FILTERS
-====================================================== */
-
-let activeFilter =
-  "all";
+/*
+Load selected lecture.
+*/
 
 
-$$(".filter").forEach(
+function loadLecture(index) {
+
+  if (
+    index < 0 ||
+    index >= lectures.length
+  ) {
+    return;
+  }
+
+
+  currentLectureIndex =
+    index;
+
+
+  const lecture =
+    lectures[index];
+
+
+  if (player) {
+
+    player.src =
+      `https://www.youtube.com/embed/${lecture.id}?rel=0&modestbranding=1`;
+
+  }
+
+
+  if (playerNumber) {
+
+    playerNumber.textContent =
+      `LECTURE ${lecture.n}`;
+
+  }
+
+
+  if (playerTitle) {
+
+    playerTitle.textContent =
+      lecture.title;
+
+  }
+
+
+  if (playerSubtitle) {
+
+    playerSubtitle.textContent =
+      lecture.sub;
+
+  }
+
+
+  renderLectures();
+
+}
+
+
+/*
+Filter buttons.
+*/
+
+
+filterButtons.forEach(
   button => {
 
     button.addEventListener(
       "click",
       () => {
 
-        $$(".filter").forEach(
+        filterButtons.forEach(
           item =>
             item.classList.remove(
               "active"
@@ -997,20 +673,15 @@ $$(".filter").forEach(
         );
 
 
-        button.classList.add(
-          "active"
-        );
+        button.classList.add("active");
 
 
         activeFilter =
-          button.dataset.filter;
+          button.dataset.filter ||
+          "all";
 
 
-        renderTable(
-          activeFilter,
-          $("#elementSearch")
-            .value
-        );
+        renderLectures();
 
       }
     );
@@ -1019,41 +690,96 @@ $$(".filter").forEach(
 );
 
 
-/* SEARCH */
+/*
+Search.
+*/
 
-$("#elementSearch")
-  .addEventListener(
+
+if (lectureSearch) {
+
+  lectureSearch.addEventListener(
     "input",
-    event => {
+    renderLectures
+  );
 
-      renderTable(
-        activeFilter,
-        event.target.value
-      );
+}
+
+
+/*
+Next lecture.
+*/
+
+
+if (nextLecture) {
+
+  nextLecture.addEventListener(
+    "click",
+    () => {
+
+      let next =
+        currentLectureIndex + 1;
+
+
+      if (
+        next >= lectures.length
+      ) {
+
+        next = 0;
+
+      }
+
+
+      loadLecture(next);
+
+
+      document
+        .querySelector(".lecture-player")
+        ?.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
 
     }
   );
 
+}
 
-/* ======================================================
-   HERO CANVAS
-====================================================== */
+
+/*
+Initial render.
+*/
+
+
+renderLectures();
+
+
+/*
+========================================================
+HERO CANVAS
+========================================================
+*/
+
 
 const heroCanvas =
-  $("#heroCanvas");
+  document.getElementById(
+    "heroCanvas"
+  );
 
 const heroCtx =
-  heroCanvas.getContext(
-    "2d"
-  );
+  heroCanvas
+    ? heroCanvas.getContext("2d")
+    : null;
 
 
 let heroParticles = [];
 
-let heroRAF = 0;
+let heroAnimationStarted = false;
 
 
-function sizeCanvas(canvas) {
+function resizeCanvas(canvas) {
+
+  if (!canvas) return null;
+
 
   const rect =
     canvas.getBoundingClientRect();
@@ -1067,16 +793,14 @@ function sizeCanvas(canvas) {
 
 
   canvas.width =
-    rect.width * dpr;
+    Math.floor(rect.width * dpr);
 
   canvas.height =
-    rect.height * dpr;
+    Math.floor(rect.height * dpr);
 
 
   const context =
-    canvas.getContext(
-      "2d"
-    );
+    canvas.getContext("2d");
 
 
   context.setTransform(
@@ -1088,57 +812,69 @@ function sizeCanvas(canvas) {
     0
   );
 
+
+  return {
+    width: rect.width,
+    height: rect.height
+  };
+
 }
 
 
-function resetHero() {
+function initHeroParticles() {
 
-  sizeCanvas(
-    heroCanvas
-  );
+  if (!heroCanvas) return;
+
+
+  const size =
+    resizeCanvas(heroCanvas);
+
+
+  if (!size) return;
 
 
   heroParticles = [];
 
 
-  const width =
-    heroCanvas.clientWidth;
+  const count =
+    Math.max(
+      28,
+      Math.floor(
+        (size.width * size.height) /
+        18000
+      )
+    );
 
-  const height =
-    heroCanvas.clientHeight;
 
-
-  for (
-    let i = 0;
-    i < 48;
-    i++
-  ) {
+  for (let i = 0; i < count; i++) {
 
     heroParticles.push({
 
-      x:
+      angle:
         Math.random() *
-        width,
+        Math.PI *
+        2,
 
-      y:
+      radius:
+        30 +
         Math.random() *
-        height,
+        Math.min(
+          size.width,
+          size.height
+        ) *
+        .32,
 
-      vx:
-        (
-          Math.random() -
-          .5
-        ) * .3,
+      speed:
+        (.0006 +
+          Math.random() * .0015) *
+        (Math.random() > .5 ? 1 : -1),
 
-      vy:
-        (
-          Math.random() -
-          .5
-        ) * .3,
+      size:
+        1.5 +
+        Math.random() * 2.5,
 
-      r:
-        1.2 +
-        Math.random() * 2
+      orbit:
+        Math.random()
 
     });
 
@@ -1147,7 +883,12 @@ function resetHero() {
 }
 
 
-function drawHero() {
+function drawHero(time) {
+
+  if (!heroCtx || !heroCanvas) {
+    return;
+  }
+
 
   const width =
     heroCanvas.clientWidth;
@@ -1164,155 +905,139 @@ function drawHero() {
   );
 
 
-  /* Grid */
-
-  heroCtx.strokeStyle =
-    "rgba(62,111,87,.08)";
-
-
-  for (
-    let x = 0;
-    x < width;
-    x += 44
-  ) {
-
-    heroCtx.beginPath();
-
-    heroCtx.moveTo(
-      x,
-      0
-    );
-
-    heroCtx.lineTo(
-      x,
-      height
-    );
-
-    heroCtx.stroke();
-
-  }
-
-
-  for (
-    let y = 0;
-    y < height;
-    y += 44
-  ) {
-
-    heroCtx.beginPath();
-
-    heroCtx.moveTo(
-      0,
-      y
-    );
-
-    heroCtx.lineTo(
-      width,
-      y
-    );
-
-    heroCtx.stroke();
-
-  }
-
-
-  /* Central atom */
-
-  const centerX =
+  const cx =
     width / 2;
 
-  const centerY =
+  const cy =
     height / 2;
 
 
-  for (
-    const radius of [
-      72,
-      128,
-      184
-    ]
-  ) {
+  /*
+  Orbit rings
+  */
 
-    heroCtx.strokeStyle =
-      "rgba(62,111,87,.18)";
+
+  for (let i = 0; i < 4; i++) {
+
+    const radius =
+      70 + i * 48;
+
 
     heroCtx.beginPath();
 
-    heroCtx.arc(
-      centerX,
-      centerY,
+    heroCtx.ellipse(
+      cx,
+      cy,
       radius,
+      radius * .65,
+      i * .25,
       0,
       Math.PI * 2
     );
 
+
+    heroCtx.strokeStyle =
+      "rgba(47,97,74,.18)";
+
+    heroCtx.lineWidth = 1;
+
     heroCtx.stroke();
 
   }
 
 
-  heroCtx.fillStyle =
-    "#3e6f57";
+  /*
+  Central nucleus.
+  */
 
 
   heroCtx.beginPath();
 
   heroCtx.arc(
-    centerX,
-    centerY,
-    25,
+    cx,
+    cy,
+    18,
     0,
     Math.PI * 2
   );
 
+
+  heroCtx.fillStyle =
+    "#2f614a";
+
   heroCtx.fill();
 
 
-  /* Floating particles */
+  heroCtx.beginPath();
+
+  heroCtx.arc(
+    cx,
+    cy,
+    29,
+    0,
+    Math.PI * 2
+  );
+
+
+  heroCtx.strokeStyle =
+    "rgba(47,97,74,.25)";
+
+  heroCtx.stroke();
+
+
+  /*
+  particles.
+  */
+
 
   heroParticles.forEach(
     particle => {
 
-      particle.x +=
-        particle.vx;
-
-      particle.y +=
-        particle.vy;
+      particle.angle +=
+        particle.speed *
+        10;
 
 
-      if (
-        particle.x < 0 ||
-        particle.x > width
-      ) {
-
-        particle.vx *= -1;
-
-      }
+      const orbitIndex =
+        Math.floor(
+          particle.radius /
+          48
+        ) % 4;
 
 
-      if (
-        particle.y < 0 ||
-        particle.y > height
-      ) {
-
-        particle.vy *= -1;
-
-      }
+      const ellipseRadius =
+        70 +
+        orbitIndex * 48;
 
 
-      heroCtx.fillStyle =
-        "rgba(62,111,87,.45)";
+      const x =
+        cx +
+        Math.cos(particle.angle) *
+        ellipseRadius;
+
+
+      const y =
+        cy +
+        Math.sin(particle.angle) *
+        ellipseRadius *
+        .65;
 
 
       heroCtx.beginPath();
 
+
       heroCtx.arc(
-        particle.x,
-        particle.y,
-        particle.r,
+        x,
+        y,
+        particle.size,
         0,
         Math.PI * 2
       );
+
+
+      heroCtx.fillStyle =
+        "rgba(23,24,21,.65)";
+
 
       heroCtx.fill();
 
@@ -1320,137 +1045,198 @@ function drawHero() {
   );
 
 
-  /* Electrons */
-
-  const time =
-    performance.now() *
-    .0003;
+  /*
+  Central glow.
+  */
 
 
-  for (
-    let i = 0;
-    i < 5;
-    i++
-  ) {
-
-    const angle =
-      time +
-      i *
-      (
-        Math.PI * 2 / 5
-      );
-
-
-    const x =
-      centerX +
-      Math.cos(angle) *
-      150;
-
-
-    const y =
-      centerY +
-      Math.sin(angle) *
-      90;
-
-
-    heroCtx.fillStyle =
-      "#b34f32";
-
-
-    heroCtx.beginPath();
-
-    heroCtx.arc(
-      x,
-      y,
-      4,
+  const gradient =
+    heroCtx.createRadialGradient(
+      cx,
+      cy,
       0,
-      Math.PI * 2
+      cx,
+      cy,
+      150
     );
 
-    heroCtx.fill();
 
-  }
+  gradient.addColorStop(
+    0,
+    "rgba(201,221,198,.25)"
+  );
 
 
-  heroRAF =
-    requestAnimationFrame(
-      drawHero
-    );
+  gradient.addColorStop(
+    1,
+    "rgba(201,221,198,0)"
+  );
+
+
+  heroCtx.fillStyle =
+    gradient;
+
+
+  heroCtx.beginPath();
+
+  heroCtx.arc(
+    cx,
+    cy,
+    150,
+    0,
+    Math.PI * 2
+  );
+
+  heroCtx.fill();
+
+
+  requestAnimationFrame(drawHero);
 
 }
 
 
-/* ======================================================
-   ELECTROCHEMISTRY VISUAL
-====================================================== */
+function startHero() {
 
-const modelCanvas =
-  $("#modelCanvas");
+  if (heroAnimationStarted) return;
 
-const modelCtx =
-  modelCanvas.getContext(
-    "2d"
+  heroAnimationStarted = true;
+
+  initHeroParticles();
+
+  requestAnimationFrame(drawHero);
+
+}
+
+
+if (heroCanvas) {
+
+  const heroObserver =
+    new IntersectionObserver(
+      entries => {
+
+        if (
+          entries[0].isIntersecting
+        ) {
+
+          startHero();
+
+          heroObserver.disconnect();
+
+        }
+
+      },
+      {
+        threshold: .05
+      }
+    );
+
+
+  heroObserver.observe(heroCanvas);
+
+}
+
+
+/*
+Resize hero.
+*/
+
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    initHeroParticles();
+
+  }
+);
+
+
+/*
+========================================================
+ELECTROCHEMICAL MODEL
+========================================================
+*/
+
+
+const electroCanvas =
+  document.getElementById(
+    "electroCanvas"
+  );
+
+const electroCtx =
+  electroCanvas
+    ? electroCanvas.getContext("2d")
+    : null;
+
+
+const mobilitySlider =
+  document.getElementById(
+    "mobilitySlider"
   );
 
 
-let modelParticles = [];
-
-let modelRAF = 0;
-
-let modelRunning =
-  true;
-
-
-function resetModel() {
-
-  sizeCanvas(
-    modelCanvas
+const mobilityValue =
+  document.getElementById(
+    "mobilityValue"
   );
 
 
-  modelParticles =
-    [];
+const pauseModel =
+  document.getElementById(
+    "pauseModel"
+  );
 
 
-  const width =
-    modelCanvas.clientWidth;
+let ionParticles = [];
 
-  const height =
-    modelCanvas.clientHeight;
+let electroPaused = false;
+
+let electroRunning = false;
 
 
-  for (
-    let i = 0;
-    i < 34;
-    i++
-  ) {
+function initElectroParticles() {
 
-    modelParticles.push({
+  if (!electroCanvas) return;
+
+
+  const rect =
+    electroCanvas.getBoundingClientRect();
+
+
+  ionParticles = [];
+
+
+  const count = 24;
+
+
+  for (let i = 0; i < count; i++) {
+
+    ionParticles.push({
 
       x:
-        width * .25 +
+        30 +
         Math.random() *
-        width * .5,
+        Math.max(
+          100,
+          rect.width - 60
+        ),
 
       y:
-        height * .25 +
+        40 +
         Math.random() *
-        height * .47,
+        Math.max(
+          100,
+          rect.height - 80
+        ),
 
-      vx:
-        (
-          Math.random() -
-          .5
-        ) * .22,
+      phase:
+        Math.random() *
+        Math.PI *
+        2,
 
-      vy:
-        (
-          Math.random() -
-          .5
-        ) * .22,
-
-      r:
-        2
+      size:
+        3 +
+        Math.random() * 3
 
     });
 
@@ -1459,16 +1245,67 @@ function resetModel() {
 }
 
 
-function drawModel() {
+function resizeElectroCanvas() {
+
+  if (!electroCanvas) return;
+
+
+  const rect =
+    electroCanvas.getBoundingClientRect();
+
+
+  const dpr =
+    Math.min(
+      window.devicePixelRatio || 1,
+      2
+    );
+
+
+  electroCanvas.width =
+    Math.floor(
+      rect.width * dpr
+    );
+
+
+  electroCanvas.height =
+    Math.floor(
+      rect.height * dpr
+    );
+
+
+  electroCtx.setTransform(
+    dpr,
+    0,
+    0,
+    dpr,
+    0,
+    0
+  );
+
+
+  initElectroParticles();
+
+}
+
+
+function drawElectro(time) {
+
+  if (
+    !electroCanvas ||
+    !electroCtx
+  ) {
+    return;
+  }
+
 
   const width =
-    modelCanvas.clientWidth;
+    electroCanvas.clientWidth;
 
   const height =
-    modelCanvas.clientHeight;
+    electroCanvas.clientHeight;
 
 
-  modelCtx.clearRect(
+  electroCtx.clearRect(
     0,
     0,
     width,
@@ -1476,813 +1313,607 @@ function drawModel() {
   );
 
 
-  const left =
-    width * .25;
-
-  const right =
-    width * .75;
-
-  const top =
-    height * .23;
-
-  const bottom =
-    height * .78;
+  /*
+  lattice
+  */
 
 
-  /* Electrodes */
-
-  modelCtx.strokeStyle =
-    "rgba(195,215,191,.36)";
-
-  modelCtx.lineWidth =
-    3;
-
-
-  modelCtx.beginPath();
-
-  modelCtx.moveTo(
-    left,
-    top
-  );
-
-  modelCtx.lineTo(
-    left,
-    bottom
-  );
-
-  modelCtx.stroke();
-
-
-  modelCtx.beginPath();
-
-  modelCtx.moveTo(
-    right,
-    top
-  );
-
-  modelCtx.lineTo(
-    right,
-    bottom
-  );
-
-  modelCtx.stroke();
-
-
-  /* Electrolyte */
-
-  modelCtx.fillStyle =
-    "rgba(195,215,191,.025)";
-
-  modelCtx.fillRect(
-    left + 18,
-    top,
-    right - left - 36,
-    bottom - top
-  );
-
-
-  /* External circuit */
-
-  modelCtx.strokeStyle =
-    "rgba(179,79,50,.45)";
-
-  modelCtx.lineWidth =
-    2;
-
-
-  modelCtx.beginPath();
-
-  modelCtx.moveTo(
-    left,
-    top
-  );
-
-  modelCtx.bezierCurveTo(
-    left,
-    height * .1,
-    right,
-    height * .1,
-    right,
-    top
-  );
-
-  modelCtx.stroke();
-
-
-  /* Electrons */
-
-  const time =
-    performance.now() *
-    .00025;
-
-
-  for (
-    let i = 0;
-    i < 5;
-    i++
-  ) {
-
-    const progress =
-      (
-        time +
-        i / 5
-      ) % 1;
-
-
-    const x =
-      left +
-      (
-        right - left
-      ) *
-      progress;
-
-
-    const y =
-      height * .105;
-
-
-    modelCtx.fillStyle =
-      "#c8b77c";
-
-
-    modelCtx.beginPath();
-
-    modelCtx.arc(
-      x,
-      y,
-      4,
-      0,
-      Math.PI * 2
+  const cols =
+    Math.max(
+      5,
+      Math.floor(width / 70)
     );
 
-    modelCtx.fill();
+
+  const rows =
+    Math.max(
+      4,
+      Math.floor(height / 70)
+    );
+
+
+  for (let row = 0; row < rows; row++) {
+
+    for (
+      let col = 0;
+      col < cols;
+      col++
+    ) {
+
+      const x =
+        35 +
+        col *
+        ((width - 70) /
+          Math.max(
+            1,
+            cols - 1
+          ));
+
+      const y =
+        35 +
+        row *
+        ((height - 70) /
+          Math.max(
+            1,
+            rows - 1
+          ));
+
+
+      electroCtx.beginPath();
+
+      electroCtx.arc(
+        x,
+        y,
+        4,
+        0,
+        Math.PI * 2
+      );
+
+
+      electroCtx.fillStyle =
+        "rgba(23,24,21,.18)";
+
+      electroCtx.fill();
+
+    }
 
   }
 
 
-  /* Ions */
+  /*
+  Slider value.
+  */
 
-  if (modelRunning) {
 
-    modelParticles.forEach(
-      particle => {
+  const mobility =
+    mobilitySlider
+      ? Number(mobilitySlider.value) / 100
+      : .5;
 
-        particle.x +=
-          particle.vx;
 
-        particle.y +=
-          particle.vy;
+  /*
+  Ion movement.
+  */
+
+
+  ionParticles.forEach(
+    ion => {
+
+      if (!electroPaused) {
+
+        ion.x +=
+          (.15 + mobility * 1.7);
+
+        ion.y +=
+          Math.sin(
+            time * .001 +
+            ion.phase
+          ) * .15;
 
 
         if (
-          particle.x <
-          left + 25 ||
-          particle.x >
-          right - 25
+          ion.x >
+          width + 20
         ) {
 
-          particle.vx *= -1;
+          ion.x = -20;
+
+          ion.y =
+            40 +
+            Math.random() *
+            Math.max(
+              100,
+              height - 80
+            );
 
         }
-
-
-        if (
-          particle.y <
-          top + 25 ||
-          particle.y >
-          bottom - 25
-        ) {
-
-          particle.vy *= -1;
-
-        }
-
-
-        modelCtx.fillStyle =
-          "rgba(195,215,191,.75)";
-
-
-        modelCtx.beginPath();
-
-        modelCtx.arc(
-          particle.x,
-          particle.y,
-          particle.r,
-          0,
-          Math.PI * 2
-        );
-
-        modelCtx.fill();
 
       }
+
+
+      /*
+      Motion trail
+      */
+
+
+      electroCtx.beginPath();
+
+      electroCtx.moveTo(
+        ion.x - 20 * mobility,
+        ion.y
+      );
+
+
+      electroCtx.lineTo(
+        ion.x,
+        ion.y
+      );
+
+
+      electroCtx.strokeStyle =
+        "rgba(47,97,74,.22)";
+
+      electroCtx.lineWidth = 2;
+
+      electroCtx.stroke();
+
+
+      /*
+      Ion
+      */
+
+
+      electroCtx.beginPath();
+
+      electroCtx.arc(
+        ion.x,
+        ion.y,
+        ion.size,
+        0,
+        Math.PI * 2
+      );
+
+
+      electroCtx.fillStyle =
+        "#2f614a";
+
+      electroCtx.fill();
+
+
+      /*
+      Positive sign
+      */
+
+
+      electroCtx.beginPath();
+
+      electroCtx.moveTo(
+        ion.x - 2,
+        ion.y
+      );
+
+      electroCtx.lineTo(
+        ion.x + 2,
+        ion.y
+      );
+
+
+      electroCtx.moveTo(
+        ion.x,
+        ion.y - 2
+      );
+
+      electroCtx.lineTo(
+        ion.x,
+        ion.y + 2
+      );
+
+
+      electroCtx.strokeStyle =
+        "#fffdf7";
+
+      electroCtx.lineWidth = 1;
+
+      electroCtx.stroke();
+
+    }
+  );
+
+
+  if (
+    !electroPaused
+  ) {
+
+    requestAnimationFrame(
+      drawElectro
     );
+
+  } else {
+
+    electroRunning = false;
 
   }
-
-
-  modelRAF =
-    requestAnimationFrame(
-      drawModel
-    );
 
 }
 
 
-/* START */
+/*
+Start electro animation safely.
+*/
 
-function restartVisuals() {
 
-  cancelAnimationFrame(
-    heroRAF
+function startElectro() {
+
+  if (
+    electroRunning ||
+    !electroCanvas
+  ) {
+    return;
+  }
+
+
+  electroRunning = true;
+
+  requestAnimationFrame(
+    drawElectro
   );
 
-  cancelAnimationFrame(
-    modelRAF
+}
+
+
+/*
+Pause / resume.
+*/
+
+
+if (pauseModel) {
+
+  pauseModel.addEventListener(
+    "click",
+    () => {
+
+      electroPaused =
+        !electroPaused;
+
+
+      pauseModel.textContent =
+        electroPaused
+          ? "Resume animation"
+          : "Pause animation";
+
+
+      if (!electroPaused) {
+
+        startElectro();
+
+      }
+
+    }
   );
 
-
-  resetHero();
-
-  resetModel();
+}
 
 
-  drawHero();
+/*
+Slider.
+*/
 
-  drawModel();
+
+if (mobilitySlider) {
+
+  mobilitySlider.addEventListener(
+    "input",
+    () => {
+
+      if (mobilityValue) {
+
+        mobilityValue.textContent =
+          `${mobilitySlider.value}%`;
+
+      }
+
+    }
+  );
+
+}
+
+
+/*
+Initialize visual model only
+when close to viewport.
+*/
+
+
+if (electroCanvas) {
+
+  resizeElectroCanvas();
+
+
+  const electroObserver =
+    new IntersectionObserver(
+      entries => {
+
+        if (
+          entries[0].isIntersecting
+        ) {
+
+          startElectro();
+
+        }
+
+      },
+      {
+        threshold: .05
+      }
+    );
+
+
+  electroObserver.observe(
+    electroCanvas
+  );
 
 }
 
 
 window.addEventListener(
   "resize",
-  restartVisuals
+  resizeElectroCanvas
 );
 
 
-restartVisuals();
+/*
+========================================================
+CONTACT ROUTING
+========================================================
+*/
 
 
-/* ======================================================
-   PAUSE VISUAL
-====================================================== */
+const whatsappLink =
+  document.getElementById(
+    "whatsappLink"
+  );
 
-$("#pauseVisual")
-  .addEventListener(
-    "click",
-    () => {
+const telegramLink =
+  document.getElementById(
+    "telegramLink"
+  );
 
-      modelRunning =
-        !modelRunning;
-
-
-      $("#pauseVisual")
-        .textContent =
-        modelRunning
-          ? "Pause visual"
-          : "Play visual";
+const emailLink =
+  document.getElementById(
+    "emailLink"
+  );
 
 
-      $("#visualStatus")
-        .textContent =
-        modelRunning
-          ? "RUNNING"
-          : "PAUSED";
+/*
+WhatsApp
+*/
+
+
+if (
+  whatsappLink &&
+  CONFIG.whatsapp
+) {
+
+  whatsappLink.href =
+    `https://wa.me/${CONFIG.whatsapp}`;
+
+
+  whatsappLink.target =
+    "_blank";
+
+
+  whatsappLink.rel =
+    "noopener";
+
+}
+
+
+/*
+Telegram
+*/
+
+
+if (
+  telegramLink &&
+  CONFIG.telegram
+) {
+
+  telegramLink.href =
+    CONFIG.telegram;
+
+
+  telegramLink.target =
+    "_blank";
+
+
+  telegramLink.rel =
+    "noopener";
+
+}
+
+
+/*
+Email
+*/
+
+
+if (
+  emailLink &&
+  CONFIG.email
+) {
+
+  emailLink.href =
+    `mailto:${CONFIG.email}`;
+
+}
+
+
+/*
+========================================================
+ENQUIRY FORM
+========================================================
+*/
+
+
+const enquiryForm =
+  document.getElementById(
+    "enquiryForm"
+  );
+
+
+const formStatus =
+  document.getElementById(
+    "formStatus"
+  );
+
+
+if (enquiryForm) {
+
+  enquiryForm.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      const name =
+        document.getElementById(
+          "studentName"
+        )?.value.trim();
+
+
+      const mobile =
+        document.getElementById(
+          "studentMobile"
+        )?.value.trim();
+
+
+      const goal =
+        document.getElementById(
+          "studentGoal"
+        )?.value;
+
+
+      const message =
+        document.getElementById(
+          "studentMessage"
+        )?.value.trim();
+
+
+      /*
+      If Google Form has been configured,
+      open it.
+      */
+
+
+      if (CONFIG.googleForm) {
+
+        window.open(
+          CONFIG.googleForm,
+          "_blank",
+          "noopener"
+        );
+
+
+        if (formStatus) {
+
+          formStatus.textContent =
+            "Google Form opened in a new tab.";
+
+        }
+
+
+        return;
+
+      }
+
+
+      /*
+      Otherwise use WhatsApp.
+      */
+
+
+      if (CONFIG.whatsapp) {
+
+        const text =
+
+`Chemistry enquiry
+
+Name: ${name || "Not provided"}
+Mobile: ${mobile || "Not provided"}
+Goal: ${goal || "General enquiry"}
+
+Message:
+${message || "No message provided."}`;
+
+
+        const url =
+          `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(text)}`;
+
+
+        window.open(
+          url,
+          "_blank",
+          "noopener"
+        );
+
+
+        if (formStatus) {
+
+          formStatus.textContent =
+            "WhatsApp opened with your enquiry.";
+
+        }
+
+
+        return;
+
+      }
+
+
+      /*
+      No endpoint configured.
+      */
+
+
+      if (formStatus) {
+
+        formStatus.textContent =
+          "Add your WhatsApp, Telegram, email or Google Form link in CONFIG inside script.js.";
+
+      }
 
     }
   );
 
-
-/* ======================================================
-   ENQUIRY FORM
-====================================================== */
-
-const enquiryForm =
-  $("#enquiryForm");
+}
 
 
-enquiryForm.addEventListener(
-  "submit",
-  event => {
+/*
+========================================================
+VISIBILITY OPTIMIZATION
+========================================================
+*/
 
-    event.preventDefault();
-
-
-    const name =
-      $("#studentName")
-        .value
-        .trim();
-
-
-    const phone =
-      $("#studentPhone")
-        .value
-        .trim();
-
-
-    const goal =
-      $("#studentGoal")
-        .value;
-
-
-    if (
-      !name ||
-      !phone ||
-      !goal
-    ) {
-
-      return;
-
-    }
-
-
-    const message =
-      [
-        "Chemistry Lab Enquiry",
-        "",
-        "Student: " + name,
-        "Mobile: " + phone,
-        "Goal: " + goal
-      ].join("\n");
-
-
-    const whatsappURL =
-      "https://wa.me/?text=" +
-      encodeURIComponent(
-        message
-      );
-
-
-    $("#formMessage")
-      .textContent =
-      "Opening WhatsApp with a pre-filled enquiry…";
-
-
-    window.open(
-      whatsappURL,
-      "_blank",
-      "noopener"
-    );
-
-  }
-);
-
-
-/* ======================================================
-   VISIBILITY PERFORMANCE
-====================================================== */
 
 document.addEventListener(
   "visibilitychange",
   () => {
 
     if (
-      document.hidden
+      document.visibilityState ===
+      "visible"
     ) {
 
-      cancelAnimationFrame(
-        heroRAF
-      );
-
-      cancelAnimationFrame(
-        modelRAF
-      );
-
-    } else {
-
-      restartVisuals();
-
-    }
-
-  }
-);
-/* ======================================================
-   SADOWAY LECTURE LIBRARY
-====================================================== */
-
-const sadowayLectures = [
-
-  {
-    id: "kI7D2lkcF8E",
-    number: "00",
-    title: "Course Introduction",
-    description:
-      "Start here. Understand the structure and purpose of the course before the technical lectures.",
-    tags: ["JEE", "NEET", "MIT"],
-    mode: ["jee", "neet", "mit"],
-    duration: "COURSE START"
-  },
-
-  {
-    id: "vPQ9a_xIqRg",
-    number: "01",
-    title: "Lecture 1",
-    description:
-      "Begin the first principles journey and establish the chemistry framework.",
-    tags: ["JEE", "NEET", "MIT"],
-    mode: ["jee", "neet", "mit"],
-    duration: "LECTURE 01"
-  },
-
-  {
-    id: "h57hFAsLAGo",
-    number: "02",
-    title: "Lecture 2",
-    description:
-      "Build the conceptual foundation and connect chemistry with physical reasoning.",
-    tags: ["JEE", "MIT"],
-    mode: ["jee", "mit"],
-    duration: "LECTURE 02"
-  },
-
-  {
-    id: "Io_4ZckeQ1k",
-    number: "03",
-    title: "Lecture 3",
-    description:
-      "Continue the progression from atomic-level ideas toward measurable behaviour.",
-    tags: ["JEE", "NEET", "MIT"],
-    mode: ["jee", "neet", "mit"],
-    duration: "LECTURE 03"
-  },
-
-  {
-    id: "5l_S8WwBVnM",
-    number: "04",
-    title: "Lecture 4",
-    description:
-      "Useful for strengthening conceptual structure before moving into exam questions.",
-    tags: ["JEE", "NEET"],
-    mode: ["jee", "neet"],
-    duration: "LECTURE 04"
-  },
-
-  {
-    id: "K30HeE8fEq8",
-    number: "05",
-    title: "Lecture 5",
-    description:
-      "Go deeper into the physical picture instead of memorising isolated facts.",
-    tags: ["JEE", "MIT"],
-    mode: ["jee", "mit"],
-    duration: "LECTURE 05"
-  },
-
-  {
-    id: "giPLtjL0Mnc",
-    number: "06",
-    title: "Lecture 6",
-    description:
-      "A good session for deliberate note-making: system, variables, relation and consequence.",
-    tags: ["JEE", "NEET", "MIT"],
-    mode: ["jee", "neet", "mit"],
-    duration: "LECTURE 06"
-  },
-
-  {
-    id: "c_4dDw7iLn8",
-    number: "07",
-    title: "Lecture 7",
-    description:
-      "Use the deeper explanation, then compress it into the language of an Indian entrance exam.",
-    tags: ["JEE", "NEET"],
-    mode: ["jee", "neet"],
-    duration: "LECTURE 07"
-  },
-
-  {
-    id: "kZJgJCxcHZE",
-    number: "08",
-    title: "Lecture 8",
-    description:
-      "Look for patterns and relationships rather than treating each equation as a separate fact.",
-    tags: ["JEE", "MIT"],
-    mode: ["jee", "mit"],
-    duration: "LECTURE 08"
-  },
-
-  {
-    id: "up3zP2z81SE",
-    number: "09",
-    title: "Lecture 9",
-    description:
-      "A useful point to pause and make your own one-page conceptual map.",
-    tags: ["JEE", "NEET", "MIT"],
-    mode: ["jee", "neet", "mit"],
-    duration: "LECTURE 09"
-  },
-
-  {
-    id: "wyoFOdR64U8",
-    number: "10",
-    title: "Lecture 10",
-    description:
-      "Continue deeper into the course and connect the lecture back to your syllabus.",
-    tags: ["JEE", "MIT"],
-    mode: ["jee", "mit"],
-    duration: "LECTURE 10"
-  }
-
-];
-
-
-/* ======================================================
-   RENDER LECTURES
-====================================================== */
-
-const lectureLibrary =
-  document.querySelector(
-    "#lectureLibrary"
-  );
-
-
-function renderSadowayLectures(
-  mode = "all"
-) {
-
-  if (!lectureLibrary) {
-    return;
-  }
-
-
-  lectureLibrary.innerHTML = "";
-
-
-  const filtered =
-    sadowayLectures.filter(
-      lecture =>
-        mode === "all" ||
-        lecture.mode.includes(mode)
-    );
-
-
-  filtered.forEach(
-    lecture => {
-
-      const card =
-        document.createElement(
-          "article"
-        );
-
-
-      card.className =
-        "lecture-card";
-
-
-      card.innerHTML = `
-
-        <div
-          class="lecture-thumb"
-          data-video="${lecture.id}"
-          data-number="${lecture.number}"
-          data-title="${lecture.title}"
-        >
-
-          <img
-            src="https://i.ytimg.com/vi/${lecture.id}/hqdefault.jpg"
-            alt="${lecture.title}"
-            loading="lazy"
-          >
-
-        </div>
-
-
-        <div class="lecture-info">
-
-          <div class="lecture-topline">
-
-            <span>
-              MIT 3.091SC
-            </span>
-
-            <span class="lecture-number">
-              ${lecture.number}
-            </span>
-
-          </div>
-
-
-          <h3>
-            ${lecture.title}
-          </h3>
-
-
-          <p>
-            ${lecture.description}
-          </p>
-
-
-          <div class="lecture-meta">
-
-            ${lecture.tags
-              .map(
-                tag =>
-                  `<span>${tag}</span>`
-              )
-              .join("")}
-
-          </div>
-
-
-          <div class="lecture-link">
-
-            <a
-              href="https://www.youtube.com/watch?v=${lecture.id}"
-              target="_blank"
-              rel="noopener"
-            >
-              WATCH VIDEO ↗
-            </a>
-
-            <span class="lecture-duration">
-              ${lecture.duration}
-            </span>
-
-          </div>
-
-        </div>
-
-      `;
-
-
-      lectureLibrary.appendChild(
-        card
-      );
-
-    }
-  );
-
-
-  attachLecturePlayers();
-
-}
-
-
-/* ======================================================
-   PLAY LECTURE IN FEATURED PLAYER
-====================================================== */
-
-function attachLecturePlayers() {
-
-  document
-    .querySelectorAll(
-      ".lecture-thumb"
-    )
-    .forEach(
-      thumbnail => {
-
-        thumbnail.addEventListener(
-          "click",
-          () => {
-
-            const id =
-              thumbnail.dataset.video;
-
-            const number =
-              thumbnail.dataset.number;
-
-            const title =
-              thumbnail.dataset.title;
-
-
-            const player =
-              document.querySelector(
-                "#featuredPlayer"
-              );
-
-
-            const heading =
-              document.querySelector(
-                "#featuredHeading"
-              );
-
-
-            const featuredTitle =
-              document.querySelector(
-                "#featuredTitle"
-              );
-
-
-            const featuredNumber =
-              document.querySelector(
-                "#featuredNumber"
-              );
-
-
-            const description =
-              document.querySelector(
-                "#featuredDescription"
-              );
-
-
-            const youtube =
-              document.querySelector(
-                "#featuredYoutube"
-              );
-
-
-            if (!player) {
-              return;
-            }
-
-
-            player.innerHTML = `
-
-              <iframe
-                src="https://www.youtube.com/embed/${id}?rel=0"
-                title="${title}"
-                allow="
-                  accelerometer;
-                  autoplay;
-                  clipboard-write;
-                  encrypted-media;
-                  gyroscope;
-                  picture-in-picture;
-                  web-share
-                "
-                allowfullscreen
-              ></iframe>
-
-            `;
-
-
-            featuredTitle.textContent =
-              title;
-
-            featuredNumber.textContent =
-              number;
-
-            heading.textContent =
-              title;
-
-
-            description.textContent =
-              "Selected from the original MIT 3.091SC lecture archive. Watch the lecture first, then map the concept to your JEE/NEET or university study plan.";
-
-
-            youtube.href =
-              "https://www.youtube.com/watch?v=" +
-              id;
-
-
-            player.scrollIntoView({
-              behavior: "smooth",
-              block: "center"
-            });
-
-          }
-        );
+      if (
+        !electroPaused
+      ) {
+
+        startElectro();
 
       }
-    );
-
-}
-
-
-/* ======================================================
-   INDIA STUDY MODE
-====================================================== */
-
-document
-  .querySelectorAll(
-    ".india-mode"
-  )
-  .forEach(
-    button => {
-
-      button.addEventListener(
-        "click",
-        () => {
-
-          document
-            .querySelectorAll(
-              ".india-mode"
-            )
-            .forEach(
-              item =>
-                item.classList.remove(
-                  "active"
-                )
-            );
-
-
-          button.classList.add(
-            "active"
-          );
-
-
-          renderSadowayLectures(
-            button.dataset.studyMode
-          );
-
-        }
-      );
 
     }
-  );
 
-
-/* INITIAL */
-
-renderSadowayLectures(
-  "all"
+  }
 );
