@@ -28,13 +28,13 @@ Leave anything blank if you don't have it yet.
 
 const CONFIG = {
 
-  whatsapp: "",
+  whatsapp: "7033131480",
 
-  telegram: "",
+  telegram: "t.me/saemlabs",
 
-  email: "",
+  email: "saemlabs@gmail.com",
 
-  googleForm: ""
+  googleForm: "docs.google.com/forms"
 
 };
 
