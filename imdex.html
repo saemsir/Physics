@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Physics | JEE, NEET & Boards</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Physics Math Rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" 
+            onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}]});">
+    </script>
+
+    <!-- Tailwind CSS Setup via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slateBg: '#0E1117',
+                        cyanAccent: '#58C4DD',
+                        yellowAccent: '#FFFF00',
+                        emeraldSuccess: '#83C167',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { background-color: #0E1117; color: #e5e7eb; overflow-x: hidden; }
+        /* The canvas sits fixed in the background */
+        #waveCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.6;
+            pointer-events: none; /* Lets clicks pass through to buttons */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased min-h-screen flex flex-col">
+
+    <!-- Interactive Background Canvas -->
+    <canvas id="waveCanvas"></canvas>
+
+    <!-- Navbar -->
+    <nav class="border-b border-gray-800 bg-[#0E1117]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-white tracking-wide">
+                Visual<span class="text-cyanAccent">Physics</span>
+            </a>
+            <div class="hidden md:flex gap-6 font-medium text-sm">
+                <a href="#" class="hover:text-cyanAccent transition-colors">Concept Gallery</a>
+                <a href="#" class="hover:text-cyanAccent transition-colors">Batches</a>
+                <a href="#" class="hover:text-cyanAccent transition-colors">Test Series</a>
+                <a href="#" class="text-yellowAccent hover:text-white transition-colors">Offline Center</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-7xl mx-auto px-6 py-20 relative z-10">
+        
+        <!-- Hero Section -->
+        <section class="text-center mb-32 pt-16">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight drop-shadow-lg">
+                Physics isn't formulas to memorize. <br class="hidden md:block"/>
+                <span class="text-cyanAccent drop-shadow-[0_0_15px_rgba(88,196,221,0.5)]">
+                    It's geometry you can visualize.
+                </span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto drop-shadow-md">
+                Deep intuition for JEE Advanced, NEET UG, and Class 9-12 Boards. No rote learning.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#" class="bg-cyanAccent text-slateBg px-8 py-3 rounded-md font-bold hover:bg-white transition-colors shadow-[0_0_20px_rgba(88,196,221,0.4)] hover:shadow-[0_0_30px_rgba(255,255,255,0.6)]">
+                    Explore Visual Physics
+                </a>
+                <a href="#" class="bg-[#0E1117]/50 backdrop-blur-sm border border-yellowAccent text-yellowAccent px-8 py-3 rounded-md font-bold hover:bg-yellowAccent hover:text-[#0E1117] transition-colors shadow-[0_0_15px_rgba(255,255,0,0.2)]">
+                    View Offline Batches
+                </a>
+            </div>
+        </section>
+
+        <!-- Course Segmenter -->
+        <section class="bg-[#0E1117]/80 backdrop-blur-md py-12 rounded-2xl border border-gray-800">
+            <h2 class="text-3xl font-bold text-center mb-12 text-white">Select Your Goal</h2>
+            <div class="grid md:grid-cols-3 gap-6 px-8">
+                <!-- Card 1 -->
+                <div class="bg-gray-900/90 border border-gray-700 p-8 rounded-xl hover:border-cyanAccent transition-all cursor-pointer group shadow-lg hover:shadow-[0_0_25px_rgba(88,196,221,0.2)]">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyanAccent transition-colors">JEE Main & Advanced</h3>
+                    <p class="text-gray-400 text-sm mb-6">Master the core concepts required to dominate your exam with visual clarity.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-cyanAccent border border-cyanAccent/30">Online</span>
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-yellowAccent border border-yellowAccent/30">Offline</span>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-gray-900/90 border border-gray-700 p-8 rounded-xl hover:border-cyanAccent transition-all cursor-pointer group shadow-lg hover:shadow-[0_0_25px_rgba(88,196,221,0.2)]">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyanAccent transition-colors">NEET UG</h3>
+                    <p class="text-gray-400 text-sm mb-6">Build rock-solid intuition for medical entrance physics without brute-force memorization.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-cyanAccent border border-cyanAccent/30">Online</span>
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-yellowAccent border border-yellowAccent/30">Offline</span>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-gray-900/90 border border-gray-700 p-8 rounded-xl hover:border-cyanAccent transition-all cursor-pointer group shadow-lg hover:shadow-[0_0_25px_rgba(88,196,221,0.2)]">
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-cyanAccent transition-colors">CBSE / ICSE Boards</h3>
+                    <p class="text-gray-400 text-sm mb-6">Class 9 to 12 foundations built through interactive geometry and real-world visualization.</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-cyanAccent border border-cyanAccent/30">Online</span>
+                        <span class="text-xs font-semibold bg-gray-800 px-3 py-1 rounded text-yellowAccent border border-yellowAccent/30">Offline</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Math Demonstration (Shows KaTeX working) -->
+        <section class="mt-20 text-center text-gray-400">
+            <p class="mb-4">Live Math Rendering Example (Gauss's Law):</p>
+            <div class="text-2xl text-white">
+                $$ \oint \vec{E} \cdot d\vec{A} = \frac{q_{enc}}{\epsilon_0} $$
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-gray-800 py-8 text-center text-sm text-gray-500 relative z-10 bg-[#0E1117]">
+        © 2026 Visual Physics. All rights reserved.
+    </footer>
+
+    <!-- JavaScript for the Interactive Canvas -->
+    <script>
+        const canvas = document.getElementById('waveCanvas');
+        const ctx = canvas.getContext('2d');
+        let time = 0;
+        
+        // Track mouse position
+        const mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+
+        // Handle resizing
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Update mouse coordinates on move
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        // Function to draw a single wave
+        function drawWave(time, amplitude, color, frequency, phase) {
+            ctx.beginPath();
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = color;
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = color;
+
+            for (let x = 0; x < canvas.width; x++) {
+                const y = canvas.height / 2 + Math.sin(x * frequency + time + phase) * amplitude;
+                if (x === 0) {
+                    ctx.moveTo(x, y);
+                } else {
+                    ctx.lineTo(x, y);
+                }
+            }
+            ctx.stroke();
+            ctx.shadowBlur = 0; // reset
+        }
+
+        // Main animation loop
+        function render() {
+            // Slight opacity clears the screen while leaving motion trails
+            ctx.fillStyle = 'rgba(14, 17, 23, 0.3)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Calculate dynamic amplitude and speed based on mouse
+            const targetAmplitude = (canvas.height / 4) * (mouse.y / canvas.height + 0.5);
+            const speed = 0.02 + (mouse.x / canvas.width) * 0.05;
+            time += speed;
+
+            // Draw the three signature colors
+            drawWave(time, targetAmplitude, '#58C4DD', 0.005, 0);       // Cyan
+            drawWave(time, targetAmplitude * 0.8, '#FFFF00', 0.007, 2); // Yellow
+            drawWave(time, targetAmplitude * 0.5, '#83C167', 0.004, 4); // Emerald
+
+            requestAnimationFrame(render);
+        }
+
+        // Start the animation
+        render();
+    </script>
+</body>
+</html>
+
